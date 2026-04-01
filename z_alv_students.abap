@@ -196,14 +196,12 @@ FORM user_command USING r_ucomm     LIKE sy-ucomm
       READ TABLE gt_alv INDEX rs_selfield-tabindex INTO gs_alv.
       IF sy-subrc = 0.
 
-*       امسح من الداتابيز فوراً
         DELETE FROM zsc_table
           WHERE student_id = gs_alv-student_id
             AND course_id  = gs_alv-course_id.
 
         COMMIT WORK.
 
-*       امسح من الشاشة
         DELETE gt_alv INDEX rs_selfield-tabindex.
 
       ENDIF.
@@ -296,7 +294,6 @@ FORM popup_add_row.
   gs_alv-course_id          = lv_course.
   gs_alv-completed_duration = lv_comp.
 
-* ضيف في الداتابيز فوراً
   CLEAR ls_sc.
   ls_sc-student_id         = lv_stud.
   ls_sc-course_id          = lv_course.
